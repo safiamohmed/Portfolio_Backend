@@ -11,7 +11,7 @@ const homeSchema = new mongoose.Schema({
   name: String,
   bio: String,
   cvLink: String,
-  image: String, // رابط الصورة المرفوعة
+  image: String, 
   socials: mongoose.Schema.Types.Mixed,
 });
 
@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
       bio:
         "Computer Engineering graduate from Al-Azhar University with a strong academic record and solid foundation in computer science, embedded systems, and software development.",
       cvLink: "Safia_Mohamed_cv.pdf",
-      image: "uploads/image-1763488967923.jpeg", // وجهد أن تضيف صورة افتراضية في مجلد uploads
+      image: "uploads/image-1763488967923.jpeg", 
       socials: {
         facebook: "https://web.facebook.com/safia.mohamed.3762",
         linkedin: "https://www.linkedin.com/in/safia-mohamed-1241b222a/",
@@ -59,7 +59,6 @@ router.get("/", async (req, res) => {
   res.json(data);
 });
 
-// تعديل بيانات home مع رفع صورة (حقل الصورة "image")
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     let data = await Home.findOne();
@@ -80,3 +79,4 @@ router.post("/", upload.single("image"), async (req, res) => {
 });
 
 module.exports = router;
+
