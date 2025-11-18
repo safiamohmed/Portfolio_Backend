@@ -14,13 +14,12 @@ const contactSchema = new mongoose.Schema({
 
 const Contact = mongoose.model('Contact', contactSchema);
 
-// إرسال رسالة (فرونت يرسل POST)
 router.post('/', async (req, res) => {
   const msg = new Contact(req.body);
   await msg.save();
   res.status(201).json({ message: "Message sent!", data: msg });
 });
 
-// يمكنك إضافة صلاحيات لجلب الرسائل إذا هناك لوحة تحكم
 
 module.exports = router;
+
