@@ -5,7 +5,6 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-// تعريف مجلد التخزين وتهيئته
 
 
 const storage = multer.diskStorage({
@@ -34,26 +33,23 @@ const upload = multer({
   storage,
   fileFilter,
   limits: { fileSize: 2 * 1024 * 1024 },
-}); // 2MB max
+}); // 2MB 
 
-// نموذج بيانات المشروع مع مسار الصورة
 const projectSchema = new mongoose.Schema({
   title: String,
   organization: String,
   date: String,
   details: [String],
-  imagePath: String, // مسار الصورة في السيرفر
+  imagePath: String, 
 });
 
 const Project = mongoose.model("Project", projectSchema);
 
-// جلب المشاريع
 router.get("/", async (req, res) => {
   const data = await Project.find();
   res.json(data);
 });
 
-// إضافة مشروع مع رفع صورة
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { title, organization, date, details } = req.body;
@@ -63,7 +59,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       title,
       organization,
       date,
-      details: details ? JSON.parse(details) : [], // في حال كانت details ترسل كنص JSON
+      details: details ? JSON.parse(details) : [], 
       imagePath,
     });
 
@@ -76,3 +72,4 @@ router.post("/", upload.single("image"), async (req, res) => {
 });
 
 module.exports = router;
+
